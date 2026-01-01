@@ -399,6 +399,140 @@ body {
     color: #333;
 }
 
+/* Certificate flip card styles */
+.flip-card {
+    perspective: 1000px;
+}
+
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+}
+
+.flip-card.is-flipped .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+}
+
+.flip-card-back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: rotateY(180deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    background: #fff;
+}
+
+.flip-card-back img {
+    max-width: 100%;
+    max-height: 360px;
+    width: auto;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    object-fit: contain;
+}
+
+/* Only enable hover flip on devices that support hover */
+@media (hover: hover) and (pointer: fine) {
+    .flip-card:hover .flip-card-inner {
+        transform: rotateY(180deg);
+    }
+}
+
+/* Ensure front content keeps original padding and layout */
+.flip-card-front .certification-card {
+    background: transparent;
+    box-shadow: none;
+    padding: 0;
+}
+
+/* Make flip cards accessible focus target */
+.flip-card {
+    outline: none;
+}
+
+/* Certificate modal styles */
+.cert-modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.7);
+    align-items: center;
+    justify-content: center;
+}
+
+.cert-modal[style*="display: block"] {
+    display: flex;
+}
+
+.cert-modal-content {
+    position: relative;
+    margin: 2rem;
+    max-width: 900px;
+    width: 100%;
+    background: #fff;
+    padding: 1rem 1.25rem 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+    text-align: center;
+}
+
+.cert-modal-close {
+    position: absolute;
+    right: 10px;
+    top: 6px;
+    background: transparent;
+    border: none;
+    font-size: 2rem;
+    line-height: 1;
+    color: #333;
+    cursor: pointer;
+}
+
+.cert-modal img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 6px;
+    margin: 0 auto;
+    display: block;
+}
+
+.cert-modal-caption {
+    margin-top: 0.75rem;
+    color: #444;
+    font-weight: 600;
+}
+
+/* Print view: show only the image */
+@media print {
+    body * { visibility: hidden; }
+    .cert-modal, .cert-modal * { visibility: visible; }
+    .cert-modal { position: static; background: #fff; }
+    .cert-modal-content { box-shadow: none; border-radius: 0; }
+}
+
+
 .education-card {
     max-width: 800px;
     margin: 0 auto;
